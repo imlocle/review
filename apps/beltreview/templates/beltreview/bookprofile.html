@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Book Profile</title>
+  </head>
+  <body>
+    <h1>{{books.book}}</h1>
+    <h3>Author: {{books.author}}</h3>
+    <a href="/books">Home</a>
+    <a href="/logout">Log Out</a>
+
+    <br>
+    <h1>Reviews</h1>
+
+    {% for review in books.review_set.all %}
+    <hr>
+    <ul>
+      <li>Rating: {{review.rating}} / 5</li>
+      <li><a href="/userprofile/{{review.name.id}}">{{review.name.name}}</a> says:{{review.review}}</li>
+    </ul>
+    {% endfor %}
+    <h4>Add a Review:</h4>
+    <form action="/addreview" method="post">
+       {% csrf_token %}
+       <input type="hidden" name="book" value="{{books.id}}">
+      <textarea name="review"></textarea>
+      Rating: <select name="rating">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+              <button type="submit">Submit Review</button>
+
+    </form>
+
+  </body>
+</html>

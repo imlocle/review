@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Belt Review</title>
+  </head>
+  <body>
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    <fieldset>
+      <legend>Register</legend>
+      <form action="/register" method="post">
+        {% csrf_token %}
+      Name: <input type="text" name="name"><br>
+      Alias: <input type="text" name="alias"><br>
+      Email: <input type="text" name="email"><br>
+      Password <input type="text" name="password"><br>
+      *Password should be at least 5 characters<br>
+      Conform PW: <input type="text" name="conpass"><br>
+      <button type="submit">Register</button>
+      </form>
+    </fieldset>
+    <fieldset>
+        <legend>Login</legend>
+        <form action="/login" method="post">
+          {% csrf_token %}
+        Email: <input type="text" name="email"><br>
+        Password: <input type="text" name="password"><br>
+        <button type="submit">Login</button>
+      </form>
+    </fieldset>
+  </body>
+</html>
